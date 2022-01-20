@@ -10,9 +10,8 @@ import com.krachkovsky.thecatsapp.util.Constants.TAG
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CatsViewModel(application: Application) : ViewModel() {
+class CatsViewModel(private val request: CatsRetrofit, application: Application) : ViewModel() {
 
-    private val request = CatsRetrofit()
     private val db = CatsDatabase.getInstance(context = application)
     val catsList = db.favoriteCatsDao().getAll()
 

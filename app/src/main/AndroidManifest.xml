@@ -10,7 +10,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.TheCatsApp">
+        android:theme="@style/Theme.TheCatsApp"
+        android:name=".CatsApp">
         <activity
             android:name=".ui.MainActivity"
             android:exported="true">

@@ -8,9 +8,11 @@ import com.bumptech.glide.Glide
 import com.krachkovsky.thecatsapp.R
 import com.krachkovsky.thecatsapp.models.AnyCat
 import com.krachkovsky.thecatsapp.viewmodels.CatsViewModel
+import org.koin.android.viewmodel.ext.android.viewModel
 
 class MainActivity : AppCompatActivity() {
 
+    private val viewModel: CatsViewModel by viewModel()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -19,7 +21,6 @@ class MainActivity : AppCompatActivity() {
         val buttonNext = findViewById<Button>(R.id.btn_next)
         val buttonPrev = findViewById<Button>(R.id.btn_prev)
         val image = findViewById<ImageView>(R.id.iv_main)
-        val viewModel = CatsViewModel(application)
         var counter = 0
 
         viewModel.catsList.observe(this, { list ->
