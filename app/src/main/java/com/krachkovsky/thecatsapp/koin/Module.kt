@@ -1,5 +1,6 @@
 package com.krachkovsky.thecatsapp.koin
 
+import com.krachkovsky.thecatsapp.adapters.CatsListAdapter
 import com.krachkovsky.thecatsapp.api.CatsRetrofit
 import com.krachkovsky.thecatsapp.viewmodels.CatsViewModel
 import org.koin.android.viewmodel.dsl.viewModel
@@ -9,5 +10,6 @@ val appModule = module {
 
     single { CatsRetrofit() }
     viewModel { CatsViewModel(get(), get()) }
+    factory { CatsListAdapter() }
 
 }

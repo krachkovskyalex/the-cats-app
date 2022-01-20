@@ -1,7 +1,6 @@
 package com.krachkovsky.thecatsapp.api
 
 import com.krachkovsky.thecatsapp.models.AnyCat
-import com.krachkovsky.thecatsapp.util.Constants.PARAM_ORDER_DESC
 import com.krachkovsky.thecatsapp.util.Constants.PARAM_ORDER_RANDOM
 import com.krachkovsky.thecatsapp.util.Constants.QUERY_PARAM_LIMIT
 import com.krachkovsky.thecatsapp.util.Constants.QUERY_PARAM_ORDER
