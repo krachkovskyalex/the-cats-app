@@ -9,6 +9,15 @@ object Constants {
 
     const val QUERY_PARAM_LIMIT = "limit"
     const val QUERY_PARAM_PAGE = "page"
+    const val QUERY_PARAM_ORDER = "order"
+
+    const val PARAM_ORDER_DESC = "DESC"
+    const val PARAM_ORDER_ASC = "ASC"
+    const val PARAM_ORDER_RANDOM = "RANDOM"
+
+    const val DB_NAME = "cats.db"
+    const val ALL_CATS = "all_cats"
+    const val FAVORITE_CATS = "favorite_cats"
 
     const val TAG = "ALEX"
 }
