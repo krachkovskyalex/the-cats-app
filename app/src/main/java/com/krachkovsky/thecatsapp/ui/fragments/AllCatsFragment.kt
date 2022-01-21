@@ -6,7 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import com.krachkovsky.thecatsapp.adapters.CatsListAdapter
-import com.krachkovsky.thecatsapp.databinding.FragmentCatsListBinding
+import com.krachkovsky.thecatsapp.databinding.FragmentAllCatsListBinding
 import com.krachkovsky.thecatsapp.viewmodels.CatsViewModel
 import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
@@ -16,7 +16,7 @@ class AllCatsFragment : Fragment() {
     private val adapter: CatsListAdapter by inject()
     private val viewModel: CatsViewModel by viewModel()
 
-    private var _binding: FragmentCatsListBinding? = null
+    private var _binding: FragmentAllCatsListBinding? = null
     private val binding
         get() = requireNotNull(_binding) {
             "View was destroyed"
@@ -28,7 +28,7 @@ class AllCatsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return FragmentCatsListBinding.inflate(inflater, container, false)
+        return FragmentAllCatsListBinding.inflate(inflater, container, false)
             .also { binding ->
                 _binding = binding
             }
@@ -38,9 +38,8 @@ class AllCatsFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        with(binding) {
-            rvMainList.adapter = adapter
-        }
+        binding.rvMain.adapter = adapter
+
         viewModel.catsList.observe(viewLifecycleOwner, {
             if (it.isEmpty()) {
                 viewModel.loadData()

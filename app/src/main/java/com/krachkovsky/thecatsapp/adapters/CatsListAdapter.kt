@@ -4,16 +4,14 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
-import com.krachkovsky.thecatsapp.databinding.CatItemBinding
+import com.krachkovsky.thecatsapp.databinding.AllCatsItemBinding
 import com.krachkovsky.thecatsapp.models.AnyCat
 
 class CatsListAdapter : ListAdapter<AnyCat, CatViewHolder>(DIFF_CALLBACK) {
 
-    private val currentCatsList = emptyList<AnyCat>()
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatViewHolder {
         return CatViewHolder(
-            binding = CatItemBinding.inflate(
+            binding = AllCatsItemBinding.inflate(
                 LayoutInflater.from(parent.context),
                 parent,
                 false

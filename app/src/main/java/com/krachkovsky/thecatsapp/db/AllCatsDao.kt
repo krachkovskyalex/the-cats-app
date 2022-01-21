@@ -14,6 +14,9 @@ interface AllCatsDao {
     @Query("SELECT * FROM all_cats")
     fun getAll(): LiveData<List<AnyCat>>
 
+    @Query("SELECT * FROM all_cats WHERE id IN (:catsIds)")
+    fun getAllByIds(catsIds: List<String>): LiveData<List<AnyCat>>
+
     @Insert(onConflict = REPLACE)
     fun insertAllCats(cats: List<AnyCat>)
 

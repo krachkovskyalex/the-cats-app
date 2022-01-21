@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation"
     app:startDestination="@id/allCatsFragment">
 
     <fragment
         android:id="@+id/allCatsFragment"
         android:name="com.krachkovsky.thecatsapp.ui.fragments.AllCatsFragment"
-        android:label="AllCatsFragment" />
+        android:label="AllCatsFragment"
+        tools:layout="@layout/fragment_all_cats_list"/>
+    <fragment
+        android:id="@+id/favoriteCatsFragment"
+        android:name="com.krachkovsky.thecatsapp.ui.fragments.FavoriteCatsFragment"
+        android:label="FavoriteCatsFragment"
+        tools:layout="@layout/fragment_favorite_cats_list"/>
 </navigation>
