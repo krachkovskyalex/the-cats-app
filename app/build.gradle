@@ -53,24 +53,24 @@ dependencies {
     implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-android:1.5.2'
 
     // Coroutine Lifecycle Scopes
-    implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0"
-    implementation "androidx.lifecycle:lifecycle-runtime-ktx:2.4.0"
+    implementation 'androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.0-alpha01'
+    implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.4.0-alpha01'
 
     // Room
-    implementation "androidx.room:room-runtime:2.4.1"
+    implementation 'androidx.room:room-runtime:2.4.1'
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
-    annotationProcessor "androidx.room:room-compiler:2.4.1"
-    kapt "androidx.room:room-compiler:2.4.1"
-    implementation "androidx.room:room-ktx:2.4.1"
+    annotationProcessor 'androidx.room:room-compiler:2.4.1'
+    kapt 'androidx.room:room-compiler:2.4.1'
+    implementation 'androidx.room:room-ktx:2.4.1'
 
     // Koin
-    implementation "io.insert-koin:koin-android:2.2.3"
-    implementation "io.insert-koin:koin-android-scope:2.2.3"
-    implementation "io.insert-koin:koin-android-viewmodel:2.2.3"
+    implementation 'io.insert-koin:koin-android:2.2.3'
+    implementation 'io.insert-koin:koin-android-scope:2.2.3'
+    implementation 'io.insert-koin:koin-android-viewmodel:2.2.3'
 
     // Glide
-    implementation "com.github.bumptech.glide:glide:4.12.0"
+    implementation 'com.github.bumptech.glide:glide:4.12.0'
 
     // Material Design Components
     implementation 'com.google.android.material:material:1.5.0'
@@ -78,6 +78,12 @@ dependencies {
     // Navigation component
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.5'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.5'
+
+    // Swipe to refresh
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0'
+
+    // Paging
+    implementation 'androidx.paging:paging-runtime-ktx:3.1.0'
 
     testImplementation 'junit:junit:4.+'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

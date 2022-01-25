@@ -5,8 +5,10 @@ import androidx.room.PrimaryKey
 import com.krachkovsky.thecatsapp.util.Constants
 
 @Entity(tableName = Constants.FAVORITE_CATS)
-data class FavoriteCatId(
-    @PrimaryKey(autoGenerate = true)
-    val id: Int,
-    val catId: String
+data class FavoriteCat(
+    @PrimaryKey
+    val id: String,
+    val url: String,
+    val width: Int,
+    val height: Int
 )

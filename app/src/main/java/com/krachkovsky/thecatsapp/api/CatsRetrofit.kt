@@ -16,7 +16,7 @@ class CatsRetrofit {
         val client = OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val request = chain.request().newBuilder()
-                    .header(name = API_KEY_NAME, value = API_KEY)
+                    .addHeader(name = API_KEY_NAME, value = API_KEY)
                     .build()
                 return@addInterceptor chain.proceed(request)
             }

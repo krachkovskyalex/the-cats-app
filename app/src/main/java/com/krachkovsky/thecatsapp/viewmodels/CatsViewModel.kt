@@ -1,40 +1,27 @@
 package com.krachkovsky.thecatsapp.viewmodels
 
-import android.app.Application
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.krachkovsky.thecatsapp.api.CatsRetrofit
-import com.krachkovsky.thecatsapp.db.CatsDatabase
-import com.krachkovsky.thecatsapp.util.Constants.TAG
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import androidx.paging.Pager
+import androidx.paging.PagingConfig
+import androidx.paging.PagingData
+import androidx.paging.cachedIn
+import com.krachkovsky.thecatsapp.models.AllCatsPageSource
+import com.krachkovsky.thecatsapp.models.AnyCat
+import kotlinx.coroutines.flow.*
 
-class CatsViewModel(private val request: CatsRetrofit, application: Application) : ViewModel() {
+class CatsViewModel(private val pagingSource: AllCatsPageSource) : ViewModel() {
 
-    private val db = CatsDatabase.getInstance(context = application)
-    val catsList = db.favoriteCatsDao().getAll()
+    val catsList: Flow<PagingData<AnyCat>> =
+        newPager()
+            .flow
+            .cachedIn(viewModelScope)
+            .stateIn(viewModelScope, SharingStarted.Lazily, PagingData.empty())
 
-    private var currentPage = 0
-
-    fun loadData() {
-        viewModelScope.launch(Dispatchers.IO) {
-            getCatsList()
+    private fun newPager(): Pager<Int, AnyCat> {
+        return Pager(PagingConfig(10)) {
+            pagingSource
         }
     }
 
-    private suspend fun getCatsList() {
-        try {
-            val response = request.apiRequest().getCatsList(page = currentPage)
-            if (response.isSuccessful) {
-                val result = response.body()
-                if (result?.isNotEmpty() == true) {
-                    result.let { db.favoriteCatsDao().insertAllCats(it) }
-                    currentPage++
-                }
-            }
-        } catch (e: Exception) {
-            Log.e(TAG, "Response is not successful -> ${e.message}")
-        }
-    }
 }

@@ -1,25 +1,21 @@
 package com.krachkovsky.thecatsapp.db
 
-import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-import com.krachkovsky.thecatsapp.models.AnyCat
+import com.krachkovsky.thecatsapp.models.FavoriteCat
 
 @Dao
 interface AllCatsDao {
 
-    @Query("SELECT * FROM all_cats")
-    fun getAll(): LiveData<List<AnyCat>>
-
-    @Query("SELECT * FROM all_cats WHERE id IN (:catsIds)")
-    fun getAllByIds(catsIds: List<String>): LiveData<List<AnyCat>>
+    @Query("SELECT * FROM favorite_cats")
+    fun getAll(): List<FavoriteCat>
 
     @Insert(onConflict = REPLACE)
-    fun insertAllCats(cats: List<AnyCat>)
+    fun insertCat(cat: FavoriteCat)
 
     @Delete
-    fun deleteCat(cat: AnyCat)
+    fun deleteCat(cat: FavoriteCat)
 }

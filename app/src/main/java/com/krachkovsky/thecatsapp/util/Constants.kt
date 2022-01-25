@@ -11,13 +11,17 @@ object Constants {
     const val QUERY_PARAM_PAGE = "page"
     const val QUERY_PARAM_ORDER = "order"
 
+    const val INITIAL_PAGE_NUMBER = 0
+    const val PARAM_PAGE_LIMIT = 10
+    const val PARAM_PAGE_LIMIT_MAX = 100
+
     const val PARAM_ORDER_DESC = "DESC"
     const val PARAM_ORDER_ASC = "ASC"
     const val PARAM_ORDER_RANDOM = "RANDOM"
 
     const val DB_NAME = "cats.db"
-    const val ALL_CATS = "all_cats"
     const val FAVORITE_CATS = "favorite_cats"
 
-    const val TAG = "ALEX"
+    const val ERROR = 1
+    const val PROGRESS = 0
 }

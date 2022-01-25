@@ -5,11 +5,11 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.krachkovsky.thecatsapp.models.AnyCat
-import com.krachkovsky.thecatsapp.models.FavoriteCatId
+import com.krachkovsky.thecatsapp.models.FavoriteCat
 import com.krachkovsky.thecatsapp.util.Constants.DB_NAME
 
 @Database(
-    entities = [AnyCat::class, FavoriteCatId::class],
+    entities = [FavoriteCat::class],
     version = 1,
     exportSchema = false
 )
@@ -33,5 +33,5 @@ abstract class CatsDatabase : RoomDatabase() {
         }
     }
 
-    abstract fun favoriteCatsDao(): AllCatsDao
+    abstract fun catsDao(): AllCatsDao
 }

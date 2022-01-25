@@ -11,8 +11,8 @@ class CatViewHolder(private val binding: AllCatsItemBinding) : RecyclerView.View
     fun bind(cat: AnyCat) {
         Glide.with(binding.root)
             .load(cat.url)
-            .placeholder(R.drawable.image_loading)
-            .error(R.drawable.no_image)
+            .placeholder(R.drawable.loading_image)
+            .error(R.drawable.error_image)
             .into(binding.ivMain)
     }
 }
