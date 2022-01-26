@@ -17,5 +17,5 @@ interface ApiService {
         @Query(QUERY_PARAM_ORDER) order: String = PARAM_ORDER_RANDOM,
         @Query(QUERY_PARAM_LIMIT) limit: Int = PARAM_PAGE_LIMIT,
         @Query(QUERY_PARAM_PAGE) page: Int = 0,
-        ): Response<List<AnyCat>>
+    ): Response<List<AnyCat>>
 }

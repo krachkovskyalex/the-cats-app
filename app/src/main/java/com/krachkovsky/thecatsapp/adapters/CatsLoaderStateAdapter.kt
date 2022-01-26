@@ -10,8 +10,6 @@ import com.bumptech.glide.Glide
 import com.krachkovsky.thecatsapp.R
 import com.krachkovsky.thecatsapp.databinding.ErrorItemBinding
 import com.krachkovsky.thecatsapp.databinding.LoadingItemBinding
-import com.krachkovsky.thecatsapp.util.Constants.ERROR
-import com.krachkovsky.thecatsapp.util.Constants.PROGRESS
 
 class CatsLoaderStateAdapter : LoadStateAdapter<CatsLoaderStateAdapter.ItemViewHolder>() {
 
@@ -43,13 +41,20 @@ class CatsLoaderStateAdapter : LoadStateAdapter<CatsLoaderStateAdapter.ItemViewH
         }
     }
 
-    abstract class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+    companion object {
+        private const val ERROR = 1
+        private const val PROGRESS = 0
 
+    }
+
+    abstract class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         abstract fun bind(loadState: LoadState)
     }
 
     class ProgressViewHolder(binding: LoadingItemBinding) : ItemViewHolder(binding.root) {
+
         private val _binding = binding
+
         override fun bind(loadState: LoadState) {
             Glide.with(_binding.root)
                 .load(R.drawable.progress_item)
@@ -64,6 +69,7 @@ class CatsLoaderStateAdapter : LoadStateAdapter<CatsLoaderStateAdapter.ItemViewH
                 parent: ViewGroup? = null,
                 attachToRoot: Boolean = false
             ): ProgressViewHolder {
+
                 return ProgressViewHolder(
                     LoadingItemBinding.inflate(
                         layoutInflater,
@@ -76,7 +82,9 @@ class CatsLoaderStateAdapter : LoadStateAdapter<CatsLoaderStateAdapter.ItemViewH
     }
 
     class ErrorViewHolder(binding: ErrorItemBinding) : ItemViewHolder(binding.root) {
+
         private val _binding = binding
+
         override fun bind(loadState: LoadState) {
             require(loadState is LoadState.Error)
             _binding.errorMessage.text = loadState.error.localizedMessage
@@ -89,6 +97,7 @@ class CatsLoaderStateAdapter : LoadStateAdapter<CatsLoaderStateAdapter.ItemViewH
                 parent: ViewGroup? = null,
                 attachToRoot: Boolean = false
             ): ErrorViewHolder {
+
                 return ErrorViewHolder(
                     ErrorItemBinding.inflate(
                         layoutInflater,

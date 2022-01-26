@@ -10,19 +10,19 @@ import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.addRepeatingJob
 import androidx.paging.LoadState
 import com.bumptech.glide.Glide
-import com.google.android.material.snackbar.Snackbar
 import com.krachkovsky.thecatsapp.R
 import com.krachkovsky.thecatsapp.adapters.CatsLoaderStateAdapter
 import com.krachkovsky.thecatsapp.adapters.CatsPagingDataAdapter
 import com.krachkovsky.thecatsapp.databinding.FragmentAllCatsListBinding
 import com.krachkovsky.thecatsapp.viewmodels.CatsViewModel
 import kotlinx.coroutines.flow.collectLatest
-import org.koin.android.ext.android.inject
 import org.koin.android.viewmodel.ext.android.viewModel
 
 class AllCatsFragment : Fragment() {
 
-    private val adapter: CatsPagingDataAdapter by inject()
+    private val adapter = CatsPagingDataAdapter(R.drawable.ic_favorite) {
+        viewModel.saveFavoriteCat(it)
+    }
     private val viewModel: CatsViewModel by viewModel()
 
     private var _binding: FragmentAllCatsListBinding? = null
@@ -60,7 +60,7 @@ class AllCatsFragment : Fragment() {
                 if (refreshState is LoadState.Error) {
                     rvMain.isVisible = false
                     frameLayoutError.isVisible = true
-                    tvAllCatsError.text = refreshState.error.localizedMessage ?: ""
+                    tvAllCatsError.text = showErrorText(refreshState.error.localizedMessage)
                 }
             }
         }
@@ -69,9 +69,15 @@ class AllCatsFragment : Fragment() {
             viewModel.catsList
                 .collectLatest(adapter::submitData)
         }
-
     }
 
+    private fun showErrorText(error: String?): String {
+        return "Network tell: " +
+                error +
+                "\n" +
+                "Please check your internet connection " +
+                "and tap to All icon with cat on the bottom..."
+    }
 
     override fun onDestroyView() {
         super.onDestroyView()

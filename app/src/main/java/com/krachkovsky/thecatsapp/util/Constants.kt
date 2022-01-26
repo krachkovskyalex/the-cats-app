@@ -21,7 +21,4 @@ object Constants {
 
     const val DB_NAME = "cats.db"
     const val FAVORITE_CATS = "favorite_cats"
-
-    const val ERROR = 1
-    const val PROGRESS = 0
 }

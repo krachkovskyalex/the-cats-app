@@ -1,14 +1,16 @@
-package com.krachkovsky.thecatsapp.models
+package com.krachkovsky.thecatsapp
 
-import android.util.Log
 import androidx.paging.PagingSource
 import androidx.paging.PagingState
-import com.krachkovsky.thecatsapp.api.CatsRetrofit
+import com.krachkovsky.thecatsapp.db.CatsDatabase
+import com.krachkovsky.thecatsapp.models.AnyCat
 import com.krachkovsky.thecatsapp.util.Constants.INITIAL_PAGE_NUMBER
 import com.krachkovsky.thecatsapp.util.Constants.PARAM_PAGE_LIMIT_MAX
-import retrofit2.HttpException
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.coroutineScope
+import kotlinx.coroutines.withContext
 
-class AllCatsPageSource(private val request: CatsRetrofit) : PagingSource<Int, AnyCat>() {
+class FavoriteCatsPageSource(private val db: CatsDatabase) : PagingSource<Int, AnyCat>() {
 
     override fun getRefreshKey(state: PagingState<Int, AnyCat>): Int? {
         val anchorPosition = state.anchorPosition ?: return null
@@ -20,18 +22,21 @@ class AllCatsPageSource(private val request: CatsRetrofit) : PagingSource<Int, A
         try {
             val pageNumber: Int = params.key ?: INITIAL_PAGE_NUMBER
             val pageSize: Int = params.loadSize.coerceAtMost(PARAM_PAGE_LIMIT_MAX)
-            Log.d("ALEX", "Page size $pageSize")
-            val response = request.apiRequest().getCatsList(page = pageNumber, limit = pageSize)
 
-            return if (response.isSuccessful) {
-                val cats = checkNotNull(response.body())
-                val nextKey = if (cats.size < pageSize) null else pageNumber + 1
-                val prevKey = if (pageNumber == 0) null else pageNumber - 1
-                LoadResult.Page(cats, prevKey, nextKey)
-            } else {
-                LoadResult.Error(HttpException(response))
+            val catsList = coroutineScope {
+                withContext(Dispatchers.IO) {
+                    db.catsDao().getAll()
+                }
             }
-        } catch (e: HttpException) {
+
+            return if (catsList.isNotEmpty()) {
+                val nextKey = if (catsList.size < pageSize) null else pageNumber + 1
+                val prevKey = if (pageNumber == 0) null else pageNumber - 1
+                LoadResult.Page(catsList, prevKey, nextKey)
+            } else {
+                error("Database is empty")
+            }
+        } catch (e: Exception) {
             return LoadResult.Error(e)
         } catch (e: Exception) {
             return LoadResult.Error(e)

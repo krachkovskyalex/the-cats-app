@@ -5,17 +5,17 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy.REPLACE
 import androidx.room.Query
-import com.krachkovsky.thecatsapp.models.FavoriteCat
+import com.krachkovsky.thecatsapp.models.AnyCat
 
 @Dao
 interface FavoriteCatsDao {
 
-    @Query("SELECT id FROM favorite_cats")
-    fun getAll(): List<String>
+    @Query("SELECT * FROM favorite_cats")
+    fun getAll(): List<AnyCat>
 
     @Insert(onConflict = REPLACE)
-    fun insertCat(cat: FavoriteCat)
+    fun insertCat(cat: AnyCat)
 
     @Delete
-    fun deleteCat(cat: FavoriteCat)
+    fun deleteCat(cat: AnyCat)
 }

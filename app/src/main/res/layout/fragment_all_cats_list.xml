@@ -26,14 +26,15 @@
     <FrameLayout
         android:id="@+id/frame_layout_loading"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
+
         <ImageView
             android:id="@+id/iv_loading_all_cats"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_gravity="center"
             android:adjustViewBounds="true"
-            android:src="@drawable/progress_main"
-            android:layout_gravity="center"/>
+            android:src="@drawable/progress_main" />
     </FrameLayout>
 
     <FrameLayout
@@ -42,33 +43,27 @@
         android:layout_height="match_parent"
         android:layout_marginHorizontal="4dp">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:id="@+id/swipe_error" >
-
         <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+            android:gravity="center"
+            android:orientation="vertical">
 
             <ImageView
                 android:id="@+id/iv_loading"
-                android:src="@drawable/error_image"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginBottom="15sp"
                 android:adjustViewBounds="true"
-                android:layout_marginBottom="15sp" />
+                android:src="@drawable/error_image" />
 
             <TextView
+                android:id="@+id/tv_all_cats_error"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:id="@+id/tv_all_cats_error"
-                tools:text="Error message"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                tools:text="Error message" />
         </LinearLayout>
-    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
     </FrameLayout>
 </LinearLayout>

@@ -11,8 +11,10 @@ import retrofit2.converter.gson.GsonConverterFactory
 class CatsRetrofit {
 
     fun apiRequest(): ApiService {
+
         val logging = HttpLoggingInterceptor()
         logging.setLevel(HttpLoggingInterceptor.Level.BODY)
+
         val client = OkHttpClient.Builder()
             .addInterceptor { chain ->
                 val request = chain.request().newBuilder()
